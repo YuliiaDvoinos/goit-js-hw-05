@@ -20,17 +20,14 @@ class Storage{
     this._items.push(item)
     
   }
-   removeItem(removedItem){
-     const newItems = [];
-
-     for (const item of this._items) {
-       if (item === removedItem) continue;
-       newItems.push(item)
-     }
-     this._items = newItems
-     return newItems
+    removeItem(item) {
+    const removedItem = this._items.indexOf(item);
+    if (removedItem !== -1) {
+      this._items.splice(removedItem, 1);
+    }
   }
 }
+
 const storage = new Storage([
   'Нанитоиды',
   'Пролонгер',
@@ -38,10 +35,13 @@ const storage = new Storage([
   'Антигравитатор',
 ]);
 const items = storage.getItems();
-console.log(items); // [ "Нанитоиды", "Пролонгер", "Железные жупи", "Антигравитатор" ]
-const afterAdd = storage.addItem('Дроид');
-console.log(newItems); // [ "Нанитоиды", "Пролонгер", "Железные жупи", "Антигравитатор", "Дроид" ]
-const afterRemove = storage.removeItem('Пролонгер');
-console.log(storage.items); // [ "Нанитоиды", "Железные жупи", "Антигравитатор", "Дроид" ]
+console.table(items); // [ "Нанитоиды", "Пролонгер", "Железные жупи", "Антигравитатор" ]
 
-//почему не работает без приведения к переменной? ну типа просто залогировать в консоль результат не выходит пока не приведу к переменной какой-то вызов метода
+storage.addItem('Дроид');
+
+console.table(items); // [ "Нанитоиды", "Пролонгер", "Железные жупи", "Антигравитатор", "Дроид" ]
+
+storage.removeItem('Пролонгер');
+
+console.table(items); // [ "Нанитоиды", "Железные жупи", "Антигравитатор", "Дроид" ]
+
